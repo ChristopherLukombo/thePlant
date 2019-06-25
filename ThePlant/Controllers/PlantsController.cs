@@ -33,32 +33,59 @@ namespace ThePlant.Controllers
         [Route("plants")]
         public ActionResult<IEnumerable<PlantModel>> GetAllPlants()
         {
-			return this.plantService.findAll();
+			return this.plantService.FindAll();
 		}
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        [HttpGet]
+        [Route("plant/{id}")]
+        public ActionResult<PlantModel> GetById(int id)
         {
-            return "value";
+            return this.plantService.FindById(id);
         }
 
-        // POST api/values
         [HttpPost]
-        public void Post([FromBody] string value)
+        [Route("plants")]
+        public ActionResult<PlantModel> AddPlant(PlantModel plantModel)
         {
+            if (plantModel == null)
+                return BadRequest("Error : null parameter for plant model.");
+
+            PlantModel result = this.plantService.AddPlant(plantModel);
+
+            if (result == null)
+                return BadRequest("Error when adding the plant with id : " + plantModel.Id);
+
+            return result;
         }
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        [Route("plants")]
+        public ActionResult<PlantModel> UpdatePlant(PlantModel plantModel)
         {
+            if (plantModel == null)
+                return BadRequest("Error : null parameter for plant model.");
+
+            PlantModel result = this.plantService.UpdatePlant(plantModel);
+
+            if (result == null)
+                return BadRequest("Error when updating the plant with id : " + plantModel.Id);
+
+            return result;
         }
 
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete]
+        [Route("plant/{id}")]
+        public ActionResult DeletePlant(int id)
         {
+            if (id <= 0)
+                return BadRequest("Error : null parameter for plant model.");
+
+            bool result = this.plantService.DeletePlant(id);
+
+            if (!result)
+                return BadRequest("Error when deleting the plant with id : " + id);
+
+            return Ok();
         }
     }
 }

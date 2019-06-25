@@ -8,6 +8,11 @@ namespace ThePlant.Business
 {
 	interface PlantService
 	{
-		List<PlantModel> findAll();
+		List<PlantModel> FindAll();
+        PlantModel FindById(int id);
+
+        PlantModel AddPlant(PlantModel plantModel);
+        PlantModel UpdatePlant(PlantModel plantModel);
+        bool DeletePlant(int id);
 	}
 }
