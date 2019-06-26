@@ -9,8 +9,8 @@ namespace ThePlant.Business.mapper
 {
 	public interface PlantMapper
 	{
-		PlantModel toEntity(PlantDTO plantDTO);
+		PlantModel ToEntity(PlantModelDTO plantDTO);
 
-		PlantDTO toDTO(PlantModel plant);
+		PlantModelDTO ToDTO(PlantModel plant);
 	}
 }

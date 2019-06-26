@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ThePlant.Business;
+using ThePlant.Entity;
 
-namespace ThePlant.Entity
+namespace ThePlant.Business.dto
 {
-	public class CommandModel
-	{
+    public class CommandModelDTO
+    {
         public int Id { get; set; }
         public DateTime CreatedAt { get; set; }
-        public IStateCommand State { get; set; }
 
-		public List<PlantModel> Plants { get; set; }
+        public List<PlantModel> Plants { get; set; }
         public List<IProduct> Options { get; set; }
-	}
+    }
 }

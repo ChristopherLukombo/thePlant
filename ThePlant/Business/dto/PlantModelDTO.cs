@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 
 namespace ThePlant.Business.dto
 {
-	public class PlantDTO
+	public class PlantModelDTO
 	{
+        public int Id { get; set; }
 		public string Name { get; set; }
 		public double Price { get; set; }
 	}

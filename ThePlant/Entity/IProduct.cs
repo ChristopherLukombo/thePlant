@@ -5,7 +5,10 @@ using System.Threading.Tasks;
 
 namespace ThePlant.Entity
 {
-	interface IProduct
+	public interface IProduct
 	{
-	}
+        int Id { get; set; }
+        string Name { get; set; }
+        double Price { get; set; }
+    }
 }

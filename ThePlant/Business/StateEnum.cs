@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ThePlant.Business.dto
+namespace ThePlant.Business
 {
-	public class ProductDTO
-	{
-	}
+    public enum StateEnum
+    {
+        Pending,
+        Finished
+    }
 }

@@ -6,8 +6,9 @@ using ThePlant.Entity;
 
 namespace ThePlant.Business
 {
-	interface CommandService
+	public interface ICommandService
 	{
-		void AddPlant(PlantModel plant);
+		//void AddPlant(PlantModel plant);
+        //void AddOption(IProduct product);
 	}
 }

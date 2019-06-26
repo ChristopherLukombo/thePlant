@@ -9,15 +9,15 @@ namespace ThePlant.Business.mapper
 {
 	public class PlantMapperImpl : PlantMapper
 	{
-		public PlantDTO toDTO(PlantModel plant)
+		public PlantModelDTO ToDTO(PlantModel plant)
 		{
-			PlantDTO plantDTO = new PlantDTO();
+			PlantModelDTO plantDTO = new PlantModelDTO();
 			plantDTO.Name = plant.Name;
 			plantDTO.Price = plant.Price;
 			return plantDTO;
 		}
 
-		public PlantModel toEntity(PlantDTO plantDTO)
+		public PlantModel ToEntity(PlantModelDTO plantDTO)
 		{
 			PlantModel plant = new PlantModel();
 			plant.Name = plantDTO.Name;
