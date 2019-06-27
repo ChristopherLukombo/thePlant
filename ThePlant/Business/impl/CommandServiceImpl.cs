@@ -10,17 +10,15 @@ namespace ThePlant.Business.impl
 {
     public class CommandServiceImpl : ICommandService
     {
-   
-		private CommandMapper commandMapper = new CommandMapperImpl();
+		private CommandServiceImpl commandServiceImpl;
 
-		// Fake repository
-		private List<CommandModel> commands = new List<CommandModel>();
+		private CommandMapper commandMapper = new CommandMapperImpl();
 
 	    private Context context = new Context();
 
 		public CommandServiceImpl()
 		{
-			// Default constructor.
+			commandServiceImpl = new CommandServiceImpl();
 		}
 
 		public CommandModelDTO SavePayment(CommandModelDTO commandModelDTO)
@@ -28,18 +26,13 @@ namespace ThePlant.Business.impl
 			CommandModel commandModel = commandMapper.ToEntity(commandModelDTO);
 			commandModel.State = new PendingState();
 			commandModel.Execute(); // command pending
-
-			commands.Add(commandModel);
-
-			return commandMapper.ToDTO(commandModel);
+			return commandMapper.ToDTO(Factory.GetCommandDAO().Save(commandModel));
 		}
 
         public CommandModelDTO Pay(CommandModelDTO commandModelDTO)
         {
 			CommandModel commandModel = commandMapper.ToEntity(commandModelDTO);
-		
-			// Design Pattern "strategy" implémenté
-			// TODO : Trouver le moyen de refactorer en ajoutant un autre design pattern
+	
 			if (commandModel.ChoicePaiment != null && commandModel.ChoicePaiment.Equals("PayPal")) {
 				context.paiement = new PaypalServiceImpl();
 			} else if (commandModel.ChoicePaiment != null && commandModel.ChoicePaiment.Equals("Cash")) {
@@ -50,10 +43,8 @@ namespace ThePlant.Business.impl
 
 			commandModel.State = new FinishedState();
 			commandModel.Execute(); // command finished
-
-			// TODO :  replace commandModel in list of commands			
-
-			return commandMapper.ToDTO(commandModel);
+	
+			return commandMapper.ToDTO(Factory.GetCommandDAO().Update(commandModel));
 		}
     }
 }

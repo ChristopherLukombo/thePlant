@@ -5,24 +5,24 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ThePlant.Business.dto;
 using ThePlant.Business.mapper;
+using ThePlant.dao;
 using ThePlant.Entity;
 
 namespace ThePlant.Business.impl
 {
 	public class PlantServiceImpl : IPlantService
 	{
-        PlantMapperImpl plantMapperImpl = new PlantMapperImpl();
+        private PlantMapperImpl plantMapperImpl;
 
-        public List<PlantModelDTO> FindAll()
+		public PlantServiceImpl()
 		{
-			PlantModel plant1 = new PlantModel() { Id = 1, Name = "Plant numero 1", Price = 10 };
-			PlantModel plant2 = new PlantModel() { Id = 2, Name = "Plant numero 2", Price = 9.50 };
+			plantMapperImpl = new PlantMapperImpl();
+		}
 
-			List<PlantModel> plants = new List<PlantModel>();
-			plants.Add(plant1);
-			plants.Add(plant2);
-
-            return plants.Select(x => plantMapperImpl.ToDTO(x)).ToList();
+		public List<PlantModelDTO> FindAll()
+		{
+			return Factory.GetPlantDAO().findAll()
+				.Select(x => plantMapperImpl.ToDTO(x)).ToList();
 		}
 
         public PlantModelDTO FindById(int id)
