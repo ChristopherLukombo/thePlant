@@ -17,10 +17,24 @@ namespace ThePlant.Controllers
 
         public CommandController()
         {
-            this.commandService = new CommandServiceImpl();
+			this.commandService = new CommandServiceImpl();
         }
 
-        /*[HttpGet]
+		[HttpPost]
+		[Route("commands/create")]
+		public ActionResult<CommandModelDTO> CreatePayment(CommandModelDTO commandModelDTO)
+		{
+		   return this.commandService.SavePayment(commandModelDTO);
+		}
+
+		[HttpPost]
+		[Route("commands/pay")]
+		public ActionResult<CommandModelDTO> CreateCommand(CommandModelDTO commandModelDTO)
+		{
+			return this.commandService.Pay(commandModelDTO);
+		}
+
+		/*[HttpGet]
         [Route("commands")]
         public ActionResult<IEnumerable<CommandModelDTO>> GetAllCommands()
         {
@@ -33,51 +47,52 @@ namespace ThePlant.Controllers
         {
             return this.plantService.FindById(id);
         }*/
+		/*
+				[HttpPost]
+				[Route("commands")]
+				public ActionResult<PlantModelDTO> Command(CommandModelDTO commandModel)
+				{
+					if (commandModel == null)
+						return BadRequest("Error : null parameter for command model.");
 
-        [HttpPost]
-        [Route("commands")]
-        public ActionResult<PlantModelDTO> AddCommand(CommandModelDTO commandModel)
-        {
-            if (commandModel == null)
-                return BadRequest("Error : null parameter for command model.");
+					CommandModelDTO result = this.commandService.AddPlant(plantModel);
 
-            CommandModelDTO result = this.commandService.AddPlant(plantModel);
+					if (result == null)
+						return BadRequest("Error when adding the plant with id : " + plantModel.Id);
 
-            if (result == null)
-                return BadRequest("Error when adding the plant with id : " + plantModel.Id);
+					return result;
+				}
 
-            return result;
-        }
+				[HttpPut]
+				[Route("plants")]
+				public ActionResult<PlantModelDTO> UpdatePlant(PlantModelDTO plantModel)
+				{
+					if (plantModel == null)
+						return BadRequest("Error : null parameter for plant model.");
 
-        [HttpPut]
-        [Route("plants")]
-        public ActionResult<PlantModelDTO> UpdatePlant(PlantModelDTO plantModel)
-        {
-            if (plantModel == null)
-                return BadRequest("Error : null parameter for plant model.");
+					PlantModelDTO result = this.plantService.UpdatePlant(plantModel);
 
-            PlantModelDTO result = this.plantService.UpdatePlant(plantModel);
+					if (result == null)
+						return BadRequest("Error when updating the plant with id : " + plantModel.Id);
 
-            if (result == null)
-                return BadRequest("Error when updating the plant with id : " + plantModel.Id);
+					return result;
+				}
 
-            return result;
-        }
+				[HttpDelete]
+				[Route("plant/{id}")]
+				public ActionResult DeletePlant(int id)
+				{
+					if (id <= 0)
+						return BadRequest("Error : null parameter for plant model.");
 
-        [HttpDelete]
-        [Route("plant/{id}")]
-        public ActionResult DeletePlant(int id)
-        {
-            if (id <= 0)
-                return BadRequest("Error : null parameter for plant model.");
+					bool result = this.plantService.DeletePlant(id);
 
-            bool result = this.plantService.DeletePlant(id);
+					if (!result)
+						return BadRequest("Error when deleting the plant with id : " + id);
 
-            if (!result)
-                return BadRequest("Error when deleting the plant with id : " + id);
+					return Ok();
+				}
+				*/
 
-            return Ok();
-        }
-
-    }
+	}
 }

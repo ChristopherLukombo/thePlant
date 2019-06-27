@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ThePlant.Entity;
 
 namespace ThePlant.Business
 {
-    public interface IStateCommand
-    {
-        void Execute(CommandModel command);
-    }
+	public class Context
+	{
+		public IPaiement paiement { get; set; }
+
+		public void Pay()
+		{
+			paiement.Pay();
+		}
+	}
 }

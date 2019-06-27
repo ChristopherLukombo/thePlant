@@ -11,7 +11,12 @@ namespace ThePlant.Business.dto
         public int Id { get; set; }
         public DateTime CreatedAt { get; set; }
 
-        public List<PlantModel> Plants { get; set; }
+		public StateEnum StateEnum { get; set; }
+
+		// paypal or other
+		public string ChoicePaiment { get; set; }
+
+		public List<PlantModel> Plants { get; set; }
         public List<IProduct> Options { get; set; }
     }
 }

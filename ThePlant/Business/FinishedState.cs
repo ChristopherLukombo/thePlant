@@ -6,8 +6,11 @@ using ThePlant.Entity;
 
 namespace ThePlant.Business
 {
-    public interface IStateCommand
-    {
-        void Execute(CommandModel command);
-    }
+	public class FinishedState : IStateCommand
+	{
+		public void Execute(CommandModel command)
+		{
+			command.StateEnum = StateEnum.Finished;
+		}
+	}
 }

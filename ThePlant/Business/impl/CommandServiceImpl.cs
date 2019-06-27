@@ -2,46 +2,58 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ThePlant.Business.dto;
+using ThePlant.Business.mapper;
 using ThePlant.Entity;
 
 namespace ThePlant.Business.impl
 {
     public class CommandServiceImpl : ICommandService
     {
-        private List<PlantModel> plants = new List<PlantModel>();
-        private List<IProduct> options = new List<IProduct>();
+   
+		private CommandMapper commandMapper = new CommandMapperImpl();
 
-        public void AddOption(CommandModel command, IProduct product)
+		// Fake repository
+		private List<CommandModel> commands = new List<CommandModel>();
+
+	    private Context context = new Context();
+
+		public CommandServiceImpl()
+		{
+			// Default constructor.
+		}
+
+		public CommandModelDTO SavePayment(CommandModelDTO commandModelDTO)
+		{
+			CommandModel commandModel = commandMapper.ToEntity(commandModelDTO);
+			commandModel.State = new PendingState();
+			commandModel.Execute(); // command pending
+
+			commands.Add(commandModel);
+
+			return commandMapper.ToDTO(commandModel);
+		}
+
+        public CommandModelDTO Pay(CommandModelDTO commandModelDTO)
         {
-            
-            options.Add(product);
-            command.Options = options;
-        }
+			CommandModel commandModel = commandMapper.ToEntity(commandModelDTO);
+		
+			// Design Pattern "strategy" implémenté
+			// TODO : Trouver le moyen de refactorer en ajoutant un autre design pattern
+			if (commandModel.ChoicePaiment != null && commandModel.ChoicePaiment.Equals("PayPal")) {
+				context.paiement = new PaypalServiceImpl();
+			} else if (commandModel.ChoicePaiment != null && commandModel.ChoicePaiment.Equals("Cash")) {
+				context.paiement = new CashServiceImpl();
+			}
 
-        public void AddPlant(CommandModel command, PlantModel plant)
-        {
-            plants.Add(plant);
-        }
+			context.Pay();
 
-        private void Build()
-        {
-            ICommandBuilder command = new Builder();
+			commandModel.State = new FinishedState();
+			commandModel.Execute(); // command finished
 
-            command.SetId(1);
-            command.SetCreatedAt(new DateTime());
+			// TODO :  replace commandModel in list of commands			
 
-            command.AddPlant(plants);
-            command.AddOption(options);
-        }
-
-        public void Pay()
-        {
-            CommandModel commandModel = new CommandModel();
-            IStateCommand pending = new PendingState();
-
-
-            commandModel.State = pending;
-            // TODO : IMPLEMENTER UN PAIEMENT AVEC PAYPAL
-        }
+			return commandMapper.ToDTO(commandModel);
+		}
     }
 }

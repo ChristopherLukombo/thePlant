@@ -8,11 +8,10 @@ namespace ThePlant.Business
 {
     public class PendingState : IStateCommand
     {
-        public void SetState(CommandModel command)
+        public void Execute(CommandModel command)
         {
+			command.StateEnum = StateEnum.Pending;
 
-
-            Console.WriteLine("Pending");
-        }
+		}
     }
 }

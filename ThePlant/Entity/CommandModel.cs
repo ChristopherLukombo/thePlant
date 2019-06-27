@@ -12,7 +12,17 @@ namespace ThePlant.Entity
         public DateTime CreatedAt { get; set; }
         public IStateCommand State { get; set; }
 
+		public StateEnum StateEnum { get; set; }
+
+		public string ChoicePaiment { get; set; }
+
 		public List<PlantModel> Plants { get; set; }
         public List<IProduct> Options { get; set; }
+
+		public void Execute()
+		{
+			State.Execute(this);
+		}
+
 	}
 }
