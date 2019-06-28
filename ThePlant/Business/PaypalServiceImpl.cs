@@ -9,7 +9,6 @@ namespace ThePlant.Business
 	{
 		public void Pay()
 		{
-			// TODO : payer par paypal
 			Console.WriteLine("Payé par Paypal");
 		}
 	}

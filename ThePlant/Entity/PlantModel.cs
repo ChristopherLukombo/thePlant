@@ -7,9 +7,12 @@ namespace ThePlant.Entity
 {
     public class PlantModel : IProduct
     {
-        public PlantModel()
-        {
-        }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public double Price { get; set; }
+        public string Type { get; set; }
+
+        public PlantModel() {}
 
         public PlantModel(int id, string name, double price, string type)
         {
@@ -19,10 +22,5 @@ namespace ThePlant.Entity
             Type = type;
         }
 
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public double Price { get; set; }
-
-        public string Type { get; set; }
     }
 }

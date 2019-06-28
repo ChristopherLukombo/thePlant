@@ -8,6 +8,6 @@ namespace ThePlant.dao
 {
 	public interface IPlantDAO
 	{
-		List<PlantModel> findAll();
+		List<PlantModel> FindAll();
 	}
 }

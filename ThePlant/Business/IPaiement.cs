@@ -8,6 +8,5 @@ namespace ThePlant.Business
 	public interface IPaiement
 	{
 		void Pay();
-
 	}
 }

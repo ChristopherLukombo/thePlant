@@ -8,7 +8,7 @@ namespace ThePlant.dao
 {
 	public class PlantDAOImpl2 : IPlantDAO
 	{
-		public List<PlantModel> findAll()
+		public List<PlantModel> FindAll()
 		{
 			List<PlantModel> plantModels = new List<PlantModel>();
 

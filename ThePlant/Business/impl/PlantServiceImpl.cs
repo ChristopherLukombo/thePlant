@@ -22,7 +22,7 @@ namespace ThePlant.Business.impl
 
 		public List<PlantModelDTO> FindAll()
 		{
-			return plantDAO.findAll()
+			return plantDAO.FindAll()
 				.Select(x => plantMapperImpl.ToDTO(x)).ToList();
 		}
 

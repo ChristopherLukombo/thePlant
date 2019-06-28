@@ -40,8 +40,14 @@ namespace ThePlant.dao
 
 		public CommandModel Update(CommandModel commandModel)
 		{
-			// TODO : faire un update
-			commandModels.Add(commandModel);
+            int index = commandModels.Select(x => x.Id).ToList().IndexOf(commandModel.Id);
+
+            if (index == -1)
+                return null;
+
+            commandModels.RemoveAt(index);
+            commandModels.Insert(index, commandModel);
+
 			return commandModel;
 		}
 	}

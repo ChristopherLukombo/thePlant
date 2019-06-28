@@ -9,9 +9,6 @@ namespace ThePlant.Business
 {
 	public interface ICommandService
 	{
-		//void AddPlant(PlantModel plant);
-		//void AddOption(IProduct product);
-
 		CommandModelDTO SavePayment(CommandModelDTO commandModelDTO);
 
 		CommandModelDTO Pay(CommandModelDTO commandModelDTO);
