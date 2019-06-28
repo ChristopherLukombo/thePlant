@@ -4,21 +4,23 @@ using System.Linq;
 using System.Threading.Tasks;
 using ThePlant.Business.dto;
 using ThePlant.Business.mapper;
+using ThePlant.dao;
 using ThePlant.Entity;
 
 namespace ThePlant.Business.impl
 {
     public class CommandServiceImpl : ICommandService
     {
-		private CommandServiceImpl commandServiceImpl;
+		private CommandServiceImpl commandServiceImpl = new CommandServiceImpl();
 
 		private CommandMapper commandMapper = new CommandMapperImpl();
 
-	    private Context context = new Context();
+		private ICommandDAO commandDAO = Factory.GetCommandDAO();
+
+		private Context context = new Context();
 
 		public CommandServiceImpl()
 		{
-			commandServiceImpl = new CommandServiceImpl();
 		}
 
 		public CommandModelDTO SavePayment(CommandModelDTO commandModelDTO)
@@ -26,7 +28,7 @@ namespace ThePlant.Business.impl
 			CommandModel commandModel = commandMapper.ToEntity(commandModelDTO);
 			commandModel.State = new PendingState();
 			commandModel.Execute(); // command pending
-			return commandMapper.ToDTO(Factory.GetCommandDAO().Save(commandModel));
+			return commandMapper.ToDTO(commandDAO.Save(commandModel));
 		}
 
         public CommandModelDTO Pay(CommandModelDTO commandModelDTO)
@@ -44,7 +46,7 @@ namespace ThePlant.Business.impl
 			commandModel.State = new FinishedState();
 			commandModel.Execute(); // command finished
 	
-			return commandMapper.ToDTO(Factory.GetCommandDAO().Update(commandModel));
+			return commandMapper.ToDTO(commandDAO.Update(commandModel));
 		}
     }
 }

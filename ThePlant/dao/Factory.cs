@@ -15,7 +15,14 @@ namespace ThePlant.Business
 
 		public static IPlantDAO GetPlantDAO()
 		{
-			return new PlantDAOImpl();
+			if (DateTime.Now.ToString("HH") == "08")
+			{
+				return new PlantDAOImpl();
+			}
+			else
+			{
+				return new PlantDAOImpl2();
+			}
 		}
 	}
 }

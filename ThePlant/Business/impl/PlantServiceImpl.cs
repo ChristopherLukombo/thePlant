@@ -12,16 +12,17 @@ namespace ThePlant.Business.impl
 {
 	public class PlantServiceImpl : IPlantService
 	{
-        private PlantMapperImpl plantMapperImpl;
+        private PlantMapperImpl plantMapperImpl = new PlantMapperImpl();
+
+		private IPlantDAO plantDAO = Factory.GetPlantDAO();
 
 		public PlantServiceImpl()
 		{
-			plantMapperImpl = new PlantMapperImpl();
 		}
 
 		public List<PlantModelDTO> FindAll()
 		{
-			return Factory.GetPlantDAO().findAll()
+			return plantDAO.findAll()
 				.Select(x => plantMapperImpl.ToDTO(x)).ToList();
 		}
 
