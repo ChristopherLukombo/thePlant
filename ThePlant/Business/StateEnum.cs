@@ -8,6 +8,7 @@ namespace ThePlant.Business
     public enum StateEnum
     {
         Pending,
-        Finished
-    }
+        Finished,
+		Canceled
+	}
 }

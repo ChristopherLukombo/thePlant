@@ -48,5 +48,15 @@ namespace ThePlant.Business.impl
 	
 			return commandMapper.ToDTO(commandDAO.Update(commandModel));
 		}
-    }
+
+		public CommandModelDTO Cancel(CommandModelDTO commandModelDTO)
+		{
+			CommandModel commandModel = commandMapper.ToEntity(commandModelDTO);
+			
+			commandModel.State = new CanceledState();
+			commandModel.Execute(); // command canceled
+
+			return commandMapper.ToDTO(commandDAO.Update(commandModel));
+		}
+	}
 }
