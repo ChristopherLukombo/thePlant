@@ -7,7 +7,7 @@ using ThePlant.Entity;
 
 namespace ThePlant.Business.mapper
 {
-	public class CommandMapperImpl : CommandMapper
+	public class CommandMapperImplWithList : CommandMapper
 	{
 		public CommandModelDTO ToDTO(CommandModel commandModel)
 		{
@@ -16,6 +16,21 @@ namespace ThePlant.Business.mapper
 			commandModelDTO.CreatedAt = commandModel.CreatedAt;
 			commandModelDTO.StateEnum = commandModel.StateEnum;
 			commandModelDTO.ChoicePaiment = commandModel.ChoicePaiment;
+
+			List<PlantModelDTO> plantsDTO = new List<PlantModelDTO>();
+			foreach (var p in commandModel.Plants)
+			{
+				PlantModelDTO plantModelDTO = new PlantModelDTO();
+				plantModelDTO.Id = p.Id;
+				plantModelDTO.Name = p.Name;
+				plantModelDTO.Price = p.Price;
+				plantModelDTO.Type = p.Type;
+
+				plantsDTO.Add(plantModelDTO);
+			}
+
+			commandModelDTO.Plants = plantsDTO;
+
 			return commandModelDTO;
 		}
 
@@ -26,6 +41,21 @@ namespace ThePlant.Business.mapper
 			commandModel.CreatedAt = commandModelDTO.CreatedAt;
 			commandModel.StateEnum = commandModelDTO.StateEnum;
 			commandModel.ChoicePaiment = commandModelDTO.ChoicePaiment;
+
+			List<PlantModel> plants = new List<PlantModel>();
+			foreach (var p in commandModelDTO.Plants)
+			{
+				PlantModel plantModel = new PlantModel();
+				plantModel.Id = p.Id;
+				plantModel.Name = p.Name;
+				plantModel.Price = p.Price;
+				plantModel.Type = p.Type;
+
+				plants.Add(plantModel);
+			}
+
+			commandModel.Plants = plants;
+
 			return commandModel;
 		}
 	}

@@ -16,7 +16,7 @@ namespace ThePlant.Business.dto
 		// paypal or other
 		public string ChoicePaiment { get; set; }
 
-		public List<PlantModel> Plants { get; set; }
+		public List<PlantModelDTO> Plants { get; set; }
         public List<IProduct> Options { get; set; }
     }
 }

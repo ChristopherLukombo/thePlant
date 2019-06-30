@@ -14,6 +14,7 @@ namespace ThePlant.Business.mapper
 			PlantModelDTO plantDTO = new PlantModelDTO();
 			plantDTO.Name = plant.Name;
 			plantDTO.Price = plant.Price;
+			plantDTO.Type = plant.Type;
 			return plantDTO;
 		}
 
@@ -22,6 +23,7 @@ namespace ThePlant.Business.mapper
 			PlantModel plant = new PlantModel();
 			plant.Name = plantDTO.Name;
 			plant.Price = plantDTO.Price;
+			plant.Type = plantDTO.Type;
 			return plant;
 		}
 	}
