@@ -7,7 +7,7 @@ using ThePlant.Entity;
 
 namespace ThePlant.Business.mapper
 {
-	public class PlantMapperImpl : PlantMapper
+	public class PlantMapperImpl : IPlantMapper
 	{
 		public PlantModelDTO ToDTO(PlantModel plant)
 		{

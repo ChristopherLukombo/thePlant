@@ -13,7 +13,7 @@ namespace ThePlant.Business.impl
     {
 		private CommandServiceImpl commandServiceImpl = new CommandServiceImpl();
 
-		private CommandMapper commandMapper = new CommandMapperImplWithList();
+		private ICommandMapper commandMapper = new CommandMapperImplWithList();
 
 		private ICommandDAO commandDAO = Factory.GetCommandDAO();
 

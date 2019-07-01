@@ -12,8 +12,8 @@ namespace ThePlant.dao
 		{
 			List<PlantModel> plantModels = new List<PlantModel>();
 
-			PlantModel plant1 = new PlantModel() { Id = 1, Name = "Plant numero 7", Price = 10 };
-			PlantModel plant2 = new PlantModel() { Id = 2, Name = "Plant numero 1", Price = 9.50 };
+			PlantModel plant1 = new PlantModel() { Id = 3, Name = "Plant numero 3", Price = 10, Type = "Sauvage" };
+			PlantModel plant2 = new PlantModel() { Id = 4, Name = "Plant numero 4", Price = 9.50, Type = "Fragile" };
 
 			plantModels.Add(plant1);
 			plantModels.Add(plant2);

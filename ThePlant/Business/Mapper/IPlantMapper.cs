@@ -7,10 +7,10 @@ using ThePlant.Entity;
 
 namespace ThePlant.Business.mapper
 {
-	public interface CommandMapper
+	public interface IPlantMapper
 	{
-		CommandModel ToEntity(CommandModelDTO commandModelDTO);
+		PlantModel ToEntity(PlantModelDTO plantDTO);
 
-		CommandModelDTO ToDTO(CommandModel commandModel);
+		PlantModelDTO ToDTO(PlantModel plant);
 	}
 }

@@ -7,7 +7,7 @@ using ThePlant.Entity;
 
 namespace ThePlant.Business.mapper
 {
-	public class CommandMapperImplWithList : CommandMapper
+	public class CommandMapperImplWithList : ICommandMapper
 	{
 		public CommandModelDTO ToDTO(CommandModel commandModel)
 		{
